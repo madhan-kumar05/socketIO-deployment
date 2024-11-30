@@ -141,3 +141,13 @@ Add the below in the nginx config file
     proxy_set_header Connection "upgrade";
   }
 ```
+To run the server in the cloud use `pm2`
+
+```bash
+  npm install pm2 -g
+```
+
+To start the server
+```bash
+  pm2 start server.js
+```
