@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.5">
+    <title>Socket IO</title>
+    <!-- Socket CDN -->
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="continer">
+        <div class="message" id="message"></div>
+        <div class="cta-section">
+            <input type="text" name="input-box" id="text-box" />
+        
+            <button type="button" onclick="sendData()">Send</button>
+        </div>
+    </div>
+    
+    <script>
+        const socket = io('http://localhost:3000/');
+
+        function sendData(){
+            let data = document.getElementById('text-box').value;
+            socket.emit('message', data);
+        }
+
+        // Receice from message
+        socket.on('message', function (data) {
+            const messageElement = document.createElement("p");
+            messageElement.textContent = data;
+            document.getElementById("message").appendChild(messageElement);
+        });
+    </script>
+</body>
+</html>
